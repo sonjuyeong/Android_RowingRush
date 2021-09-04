@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".EventEditActivity"
-    android:background="@color/colorBar">
+    android:background="@color/colorBar">//안뇽
 
     <LinearLayout
         android:layout_width="match_parent"
