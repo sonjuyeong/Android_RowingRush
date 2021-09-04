@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".EventEditActivity"
-    android:background="@color/colorBar"> //안녕
+    android:background="@color/colorBar"> // 제발 해주라 제발
 
     <LinearLayout
         android:layout_width="match_parent"
