@@ -30,7 +30,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:onClick="Ibtn_change"
-            android:src="@drawable/user"
+            app:srcCompat="@drawable/user"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <LinearLayout
@@ -50,10 +50,11 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/set_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="5dp"
+                android:onClick="set_profile"
                 android:text="프로필 내용"
                 android:textColor="@color/colorGray"
                 android:textSize="15sp"
