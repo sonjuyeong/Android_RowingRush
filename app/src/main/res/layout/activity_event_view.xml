@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EventEditActivity"
+    tools:context=".EventViewActivity"
     android:background="@color/colorBar">
 
 
@@ -14,14 +14,13 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/eventNameET"
+        <TextView
+            android:id="@+id/eventName"
             android:layout_width="367dp"
             android:layout_height="62dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:inputType="text"
             android:text="제목"
             android:textColor="#808080"
             android:textSize="30sp"
@@ -46,7 +45,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.7"
-                android:onClick="dateButton_S"
                 android:text="2021년 12월 28일(월)"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -86,8 +84,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.7"
-
-                android:onClick="dateButton_E"
                 android:text="2021년 12월 31일(목)"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -103,6 +99,7 @@
                 android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
+
         </LinearLayout>
 
         <LinearLayout
@@ -114,19 +111,12 @@
             android:layout_marginBottom="15dp"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All day"
-                android:textStyle="bold"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
         </LinearLayout>
 
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,7 +142,6 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:onClick="Alert_time"
                 android:text="알림 추가"
                 android:textColor="#7C7C7C"
                 android:textSize="16sp"
@@ -201,26 +190,28 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:background="@null"
-            android:onClick="saveEventAction"
-            android:text="Save"
+            android:onClick="EventAction"
+            android:text="수정"
             android:textColor="@color/Blue"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="OnClick,TouchTargetSizeCheck" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:background="@null"
             android:onClick="btn_back"
-            android:text="Cancel"
+            android:text="삭제"
             android:textColor="@color/Blue"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
 
 
     </LinearLayout>

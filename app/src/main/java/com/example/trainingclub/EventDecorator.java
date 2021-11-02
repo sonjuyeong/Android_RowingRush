@@ -13,18 +13,18 @@ public class EventDecorator implements DayViewDecorator {
 
     private final Drawable drawable;
     private int color;
-    private HashSet<LocalDate> dates;
+    private HashSet<Event> Dates_E;
     private TextView textView;
-    public EventDecorator(Collection<LocalDate> dates, Activity context, TextView textView) {
+    public EventDecorator(Collection<Event> Dates_E, Activity context, TextView textView) {
         drawable = context.getResources().getDrawable(R.drawable.calendar_background);
 
-        this.dates = new HashSet<>(dates);
+        this.Dates_E = new HashSet<>(Dates_E);
         this.textView = textView;
     }
 
     @Override
     public boolean shouldDecorate(LocalDate day){
-        return dates.contains(day);
+        return Dates_E.contains(day);
     }
 
     @Override

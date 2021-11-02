@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CalendarUtils
 {
@@ -13,19 +14,19 @@ public class CalendarUtils
 
   public static String formattedDate(LocalDate date)
   {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Y년 M월 d일");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("Y년 M월 d일").withLocale(Locale.forLanguageTag("ko"));
     return date.format(formatter);
   }
 
   public static String formattedTime(LocalTime time)
   {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a h:mm").withLocale(Locale.forLanguageTag("ko"));
     return time.format(formatter);
   }
 
   public static String monthYearFromDate(LocalDate date)
   {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("y년 M월");
     return date.format(formatter);
   }
 

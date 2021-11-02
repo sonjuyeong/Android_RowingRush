@@ -63,7 +63,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:onClick="dis5"
@@ -82,11 +82,81 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@color/colorBar"
         android:layout_width="match_parent"
-        android:layout_height="401dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/my_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="son"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text=" 님의 순위:"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:id="@+id/my_ranking"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:text="90위"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/my_time"
+                android:layout_marginLeft="10sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0:10:30"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="312dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id='@+id/rvList1'
+            android:id='@+id/rvList5'
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

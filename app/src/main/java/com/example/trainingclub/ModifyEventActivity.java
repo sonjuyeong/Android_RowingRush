@@ -11,13 +11,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
-public class EventEditActivity extends AppCompatActivity {
+public class ModifyEventActivity extends AppCompatActivity {
 
 
     SwitchCompat switchButton;
@@ -27,6 +27,7 @@ public class EventEditActivity extends AppCompatActivity {
     private LocalTime time;
     private LocalTime time_2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,21 +35,15 @@ public class EventEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_edit);
         initDatePicker_S();
         initDatePicker_E();
-        eventNameET = findViewById(R.id.eventNameET);
+        initWidgets();
         switchButton = findViewById(R.id.switchButton);
         DateTV_S = findViewById(R.id.DateTV_S);
         DateTV_E = findViewById(R.id.DateTV_E);
-        DateTV_S.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
-        DateTV_E.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         TimeTV_S = findViewById(R.id.TimeTV_S);
         TimeTV_E = findViewById(R.id.TimeTV_E);
-        time = LocalTime.now();
-        time_2=time.plusHours(1);
-        TimeTV_S.setText(CalendarUtils.formattedTime(time));
-        TimeTV_E.setText(CalendarUtils.formattedTime(time_2));
 
         switchButton.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(compoundButton.isChecked()){
+            if (compoundButton.isChecked()) {
                 TimeTV_S.setText("하루종일");
                 TimeTV_E.setText("하루종일");
                 TimeTV_E.setVisibility(View.INVISIBLE);
@@ -56,8 +51,7 @@ public class EventEditActivity extends AppCompatActivity {
                 DateTV_S.setX(550);
                 DateTV_E.setX(550);
 
-            }
-            else{
+            } else {
                 TimeTV_S.setText(CalendarUtils.formattedTime(time));
                 TimeTV_E.setText(CalendarUtils.formattedTime(time_2));
                 TimeTV_S.setVisibility(View.VISIBLE);
@@ -69,13 +63,12 @@ public class EventEditActivity extends AppCompatActivity {
         });
 
 
-
         TimeTV_S.setOnClickListener(v -> {
             // Initialize a new time picker dialog fragment
             DialogFragment dFragment = new TimePickerFragment_S();
 
             // Show the time picker dialog fragment
-            dFragment.show(getFragmentManager(),"시작시간 선택");
+            dFragment.show(getFragmentManager(), "시작시간 선택");
         });
 
         TimeTV_E.setOnClickListener(v -> {
@@ -83,18 +76,19 @@ public class EventEditActivity extends AppCompatActivity {
             DialogFragment dFragment = new TimePickerFragment_E();
 
             // Show the time picker dialog fragment
-            dFragment.show(getFragmentManager(),"마감시간 선택");
+            dFragment.show(getFragmentManager(), "마감시간 선택");
         });
     }
-
-
 
 
     private void initDatePicker_S() {
         DatePickerDialog.OnDateSetListener dateSetListener_S = (datePicker, year, month, day) -> {
             month = month + 1;
             String date = makeDateString(year, month, day);
-            DateTV_S.setText(date);
+            Date date1 = new Date(year, month, day - 3);
+            SimpleDateFormat dateformat = new SimpleDateFormat("EE", Locale.forLanguageTag("ko"));
+            String weekDay = dateformat.format(date1);
+            DateTV_S.setText(date + "(" + weekDay + ")");
 
         };
         Calendar cal = Calendar.getInstance();
@@ -107,12 +101,14 @@ public class EventEditActivity extends AppCompatActivity {
     }
 
 
-
     private void initDatePicker_E() {
         DatePickerDialog.OnDateSetListener dateSetListener_E = (datePicker, year, month, day) -> {
             month = month + 1;
             String date = makeDateString(year, month, day);
-            DateTV_E.setText(date);
+            Date date1 = new Date(year, month, day - 3);
+            SimpleDateFormat dateformat = new SimpleDateFormat("EE", Locale.forLanguageTag("ko"));
+            String weekDay = dateformat.format(date1);
+            DateTV_E.setText(date + "(" + weekDay + ")");
         };
 
         Calendar cal = Calendar.getInstance();
@@ -126,8 +122,10 @@ public class EventEditActivity extends AppCompatActivity {
     }
 
 
+    private void initWidgets() {
+        eventNameET = findViewById(R.id.eventNameET);
 
-
+    }
 
 
     private String makeDateString(int year, int month, int day) {
@@ -136,32 +134,16 @@ public class EventEditActivity extends AppCompatActivity {
 
 
     public void saveEventAction(View view) {
-
-        try {
-            String eventDate_S = DateTV_S.getText().toString();
-            String eventDate_E = DateTV_E.getText().toString();
-            String eventName = eventNameET.getText().toString();
-            String eventTime_S = TimeTV_S.getText().toString();
-            String eventTime_E = TimeTV_E.getText().toString();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy년 mm월 dd일");
-            Date FirstDate = format.parse(eventDate_S);
-            Date EndDate = format.parse(eventDate_E);
-            long calsec = (EndDate.getTime()-FirstDate.getTime())/1000;
-            long calDateDays=calsec/(24*60*60);
-
-            for(int i=0;i<=calDateDays;i++)
-            {
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(FirstDate);
-                cal.add(Calendar.DATE, i);
-                String MeventDate_E=format.format(cal.getTime());
-                Event newEvent= new Event(eventName, eventTime_S,eventTime_E,eventDate_S, MeventDate_E);
-                Event.eventsList.add(newEvent);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String eventName = eventNameET.getText().toString();
+        String eventDate_S = DateTV_S.getText().toString();
+        String eventDate_E = DateTV_E.getText().toString();
+        String eventTime_S = TimeTV_S.getText().toString();
+        String eventTime_E = TimeTV_E.getText().toString();
+        Event newEvent = new Event(eventName, eventTime_S, eventTime_E, eventDate_S, eventDate_E);
+        Event.eventsList.add(newEvent);
         finish();
+
+
     }
 
 

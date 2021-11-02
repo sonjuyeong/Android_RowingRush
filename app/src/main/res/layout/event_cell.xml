@@ -3,16 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="60dp">
+    android:layout_height="70dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginStart="20dp"
         android:id="@+id/eventCellTV"
-        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Event"
         android:textColor="@color/black"
-        android:text="Event"/>
+        android:textSize="22sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/eventCellTV_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:text="오전 12:00 - 오후 9:00"
+        android:textColor="@color/colorGray"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

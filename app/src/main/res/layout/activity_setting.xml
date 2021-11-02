@@ -41,6 +41,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/my_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -79,7 +80,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:background="@null"
-            android:onClick="logout"
+            android:onClick="announcement"
             android:drawableStart="@drawable/loudspeaker"
             android:text="     공지사항"
             android:textAlignment="textStart"
@@ -198,7 +199,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_baseline_edit_calendar_click"
+            android:drawableTop="@drawable/ic_baseline_edit_calendar_24"
             android:onClick="btn_calendar"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -206,7 +207,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:drawableTop="@drawable/ic_baseline_settings_24"
+            android:drawableTop="@drawable/ic_baseline_settings_click"
             android:onClick="btn_setting"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

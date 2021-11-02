@@ -14,21 +14,22 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class RankingActivity extends AppCompatActivity implements InterfaceFAN, InterfaceFilejson.list{
+public class RankingActivity5 extends AppCompatActivity implements InterfaceFAN, InterfaceFilejson.list5{
 
-    private RecyclerView rvList1;
+    private RecyclerView rvList5;
     TextView My_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ranking);
-        rvList1=(RecyclerView) findViewById(R.id.rvList1);
-
+        setContentView(R.layout.activity_ranking5);
+        rvList5=(RecyclerView) findViewById(R.id.rvList5);
+        My_id=(TextView) findViewById(R.id.my_id);
+        String myid = ((LoginActivity)LoginActivity.context_main).MYID;
+        My_id.setText(myid);
         String url = "https://script.google.com/macros/s/AKfycbylvetNHghg319R-1_Nid9Ei_JV4ef-89ZJnyeHTo6JyOi4ofSmdSFH6MbbMq8l5nz2/exec?action=read";
         Request request=new Request();
-        request.getItems(url,"list",this);
-
+        request.getItems(url, "list", this);
 
     }
 
@@ -44,12 +45,10 @@ public class RankingActivity extends AppCompatActivity implements InterfaceFAN, 
         startActivity(new Intent(this, MainActivity.class));
     }
 
-
     @Override
     public void successFAN(String json) throws JSONException {
         Filejson filejson = new Filejson();
-        filejson.listRegisteration(json, this);
-
+        filejson.listRegisteration5(json, this);
     }
 
     @Override
@@ -59,16 +58,15 @@ public class RankingActivity extends AppCompatActivity implements InterfaceFAN, 
 
     }
 
-
     @Override
-    public void listRegisteration(ArrayList<RegisterModel> registerModels) {
+    public void listRegisteration5(ArrayList<RegisterModel> registerModels) {
         ListViewAdapter listViewAdapter = new ListViewAdapter(this,registerModels);
-        rvList1.setAdapter(listViewAdapter);
-        rvList1.setLayoutManager(new LinearLayoutManager(this));
-
+        rvList5.setAdapter(listViewAdapter);
+        rvList5.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void dis1(View view) {
+        startActivity(new Intent(this, RankingActivity.class));
 
     }
     public void dis3(View view){
@@ -76,6 +74,5 @@ public class RankingActivity extends AppCompatActivity implements InterfaceFAN, 
     }
 
     public void dis5(View view) {
-        startActivity(new Intent(this, RankingActivity5.class));
     }
 }

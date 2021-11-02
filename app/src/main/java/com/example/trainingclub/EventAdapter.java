@@ -14,11 +14,11 @@ import java.util.List;
 
 public class EventAdapter extends ArrayAdapter<Event>
 {
+
     public EventAdapter(@NonNull Context context, List<Event> events)
     {
         super(context, 0, events);
     }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
@@ -28,10 +28,24 @@ public class EventAdapter extends ArrayAdapter<Event>
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
 
-        TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
-
-        String eventTitle = event.getName() +" "+ CalendarUtils.formattedTime(event.getTime());
-        eventCellTV.setText(eventTitle);
+        TextView eventCellTV1 = convertView.findViewById(R.id.eventCellTV);
+        String eventTitle = event.getName();
+        eventCellTV1.setText(eventTitle);
+        TextView eventCellTV2 = convertView.findViewById(R.id.eventCellTV_time);
+        String eventTime;
+        if(event.getTime_S().equals("하루종일"))
+        {
+            eventTime = event.getTime_S();
+        }
+        else
+        {
+            eventTime = event.getTime_S() + " - " + event.getTime_E();
+        }
+        eventCellTV2.setText(eventTime);
         return convertView;
     }
+
+
+
+
 }
