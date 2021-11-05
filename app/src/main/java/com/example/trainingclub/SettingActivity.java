@@ -1,28 +1,28 @@
 package com.example.trainingclub;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingActivity extends AppCompatActivity {
 
     private final int GET_GALLERY_IMAGE = 200;
     private ImageView imageview;
+    TextView My_id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        My_id=(TextView) findViewById(R.id.my_id);
+        String myid = ((LoginActivity)LoginActivity.context_main).MYID;
+        My_id.setText(myid);
     }
 
     public void set_profile(View view) {
@@ -32,6 +32,9 @@ public class SettingActivity extends AppCompatActivity {
     public void logout(View view) { startActivity(new Intent(this, LoginActivity.class)); }
 
     public void Activity_log(View view) {
+    }
+
+    public void announcement(View view) {
     }
 
     public void Account(View view) {

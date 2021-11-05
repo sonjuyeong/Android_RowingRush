@@ -1,7 +1,10 @@
 package com.example.trainingclub;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,11 +24,13 @@ public class EventEditActivity extends AppCompatActivity {
 
 
     SwitchCompat switchButton;
-    private DatePickerDialog datePickerDialog_S, datePickerDialog_E;
+    private DatePickerDialog datePickerDialog_S, datePickerDialog_E, datePickerDialog;
     private EditText eventNameET;
-    private TextView DateTV_S, DateTV_E, TimeTV_S, TimeTV_E;
+    private TextView DateTV_S, DateTV_E, TimeTV_S, TimeTV_E, alert_time;
     private LocalTime time;
     private LocalTime time_2;
+    public Calendar c = Calendar.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class EventEditActivity extends AppCompatActivity {
         switchButton = findViewById(R.id.switchButton);
         DateTV_S = findViewById(R.id.DateTV_S);
         DateTV_E = findViewById(R.id.DateTV_E);
+        alert_time = findViewById(R.id.alert_time);
         DateTV_S.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         DateTV_E.setText(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         TimeTV_S = findViewById(R.id.TimeTV_S);
@@ -66,6 +72,7 @@ public class EventEditActivity extends AppCompatActivity {
                 DateTV_E.setX(250);
 
             }
+
         });
 
 
@@ -85,9 +92,28 @@ public class EventEditActivity extends AppCompatActivity {
             // Show the time picker dialog fragment
             dFragment.show(getFragmentManager(),"마감시간 선택");
         });
+
+        alert_time.setOnClickListener(v -> {
+            DialogFragment dFragment = new TimePickerFragment();
+
+            dFragment.show(getFragmentManager(), "알람시간 선택");
+        });
+
     }
-
-
+//
+//    private void initDatePicker() {
+//        DatePickerDialog.OnDateSetListener dateSetListener = (datePicker, year, month, day) -> {
+//            month = month +1;
+//            String date = makeDateString(year, month, day);
+//            alert_time.setText(date);
+//        };
+//        Calendar cal = Calendar.getInstance();
+//        int year = cal.get(Calendar.YEAR);
+//        int month = cal.get(Calendar.MONTH);
+//        int day = cal.get(Calendar.DAY_OF_MONTH);
+//
+//        datePickerDialog = new DatePickerDialog(this, dateSetListener, year, month, day);
+//    }
 
 
     private void initDatePicker_S() {
@@ -127,9 +153,6 @@ public class EventEditActivity extends AppCompatActivity {
 
 
 
-
-
-
     private String makeDateString(int year, int month, int day) {
         return year + "년 " + month + "월 " + day + "일";
     }
@@ -161,7 +184,28 @@ public class EventEditActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        onTimeSet(c, Calendar.HOUR_OF_DAY, Calendar.MINUTE);
         finish();
+    }
+
+    public void onTimeSet(Calendar view, int hourOfDay, int minute) {
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
+
+        startAlarm(c);
+    }
+
+    private void startAlarm(Calendar c){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if(c.before((Calendar.getInstance()))){
+            c.add(Calendar.DATE, 1);
+        }
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
     }
 
 
@@ -177,11 +221,14 @@ public class EventEditActivity extends AppCompatActivity {
 
 
     public void Alert_time(View view) {
+        datePickerDialog.show();
+
     }
 
     public void btn_back(View view) {
         startActivity(new Intent(this, WeekViewActivity.class));
 
     }
+
 
 }

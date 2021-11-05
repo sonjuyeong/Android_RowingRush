@@ -52,6 +52,12 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         }
     }
 
+    public void eventViewHolder(@NonNull CalendarViewHolder holder, int position)
+    {
+      EventDecorator.show();
+    }
+
+
     @Override
     public int getItemCount()
     {

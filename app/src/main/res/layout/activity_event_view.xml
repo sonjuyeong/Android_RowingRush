@@ -169,7 +169,6 @@
                 android:layout_marginLeft="10dp"
                 android:background="@color/white"
                 android:hint="메모"
-                android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:textColor="@color/black"
                 android:textColorHint="#7C7C7C"
